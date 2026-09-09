@@ -1,0 +1,4 @@
+{
+    "cmake.ignoreCMakeListsMissing": true,
+    "labJIF.sessionGuardEnabled": false
+}

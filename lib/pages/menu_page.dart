@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+
 import 'login_page.dart';
 import 'group_data_page.dart';
-import 'add_sub_page.dart';
-import 'mul_div_page.dart';
+import 'calculator_page.dart';
 import 'odd_even_page.dart';
-import 'sum_total_page.dart';
+import 'count_page.dart';
 
 /// Halaman Menu Utama
-/// Menampilkan navigasi ke semua fitur aplikasi kalkulator.
+/// Berisi 4 menu navigasi utama aplikasi:
+/// 1. Data Kelompok
+/// 2. Operasi Matematika (+, -, *, /)
+/// 3. Cek Ganjil / Genap
+/// 4. Hitung Banyak Angka (COUNT)
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
 
@@ -17,12 +21,12 @@ class MenuPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Menu Utama'),
         actions: [
-          // Tombol Logout di pojok kanan atas
+          // Tombol Logout di AppBar
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: 'Logout',
             onPressed: () {
-              // Kembali ke Halaman Login dan bersihkan riwayat navigasi
+              // Kembali ke halaman Login
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const LoginPage()),
@@ -34,47 +38,47 @@ class MenuPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          // Menu 1: Data Kelompok
           _buildMenuCard(
             context,
             icon: Icons.group,
-            title: 'Data Kelompok',
-            subtitle: 'Lihat data anggota kelompok',
+            title: '1. Data Kelompok',
+            subtitle: 'Daftar nama dan NIM anggota kelompok',
             page: const GroupDataPage(),
           ),
+
+          // Menu 2: Operasi Matematika (+, -, *, /)
           _buildMenuCard(
             context,
-            icon: Icons.add_circle_outline,
-            title: 'Penjumlahan & Pengurangan',
-            subtitle: 'Operasi tambah dan kurang dua angka',
-            page: const AddSubPage(),
+            icon: Icons.calculate,
+            title: '2. Operasi Matematika (+, -, ×, ÷)',
+            subtitle: 'Penjumlahan, pengurangan, perkalian, dan pembagian',
+            page: const CalculatorPage(),
           ),
-          _buildMenuCard(
-            context,
-            icon: Icons.close,
-            title: 'Perkalian & Pembagian',
-            subtitle: 'Operasi kali dan bagi dua angka',
-            page: const MulDivPage(),
-          ),
+
+          // Menu 3: Cek Ganjil / Genap
           _buildMenuCard(
             context,
             icon: Icons.filter_2,
-            title: 'Cek Ganjil / Genap',
-            subtitle: 'Input satu bilangan, cek ganjil atau genap',
+            title: '3. Cek Ganjil / Genap',
+            subtitle: 'Cek status bilangan ganjil atau genap',
             page: const OddEvenPage(),
           ),
+
+          // Menu 4: Hitung Banyak Angka (COUNT)
           _buildMenuCard(
             context,
-            icon: Icons.summarize,
-            title: 'Jumlah Total Angka',
-            subtitle: 'Total dari beberapa angka dalam satu input',
-            page: const SumTotalPage(),
+            icon: Icons.format_list_numbered,
+            title: '4. Hitung Banyak Angka',
+            subtitle: 'Menghitung banyaknya angka/elemen yang dimasukkan',
+            page: const CountPage(),
           ),
         ],
       ),
     );
   }
 
-  /// Helper widget untuk membuat kartu menu agar kodingan tidak berulang (DRY - Don't Repeat Yourself)
+  /// Helper widget untuk membuat card menu agar rapi dan tidak duplikat
   Widget _buildMenuCard(
     BuildContext context, {
     required IconData icon,
@@ -83,7 +87,7 @@ class MenuPage extends StatelessWidget {
     required Widget page,
   }) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 14),
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
@@ -93,14 +97,10 @@ class MenuPage extends StatelessWidget {
           foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
           child: Icon(icon),
         ),
-        title: Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text(subtitle),
         trailing: const Icon(Icons.arrow_forward_ios, size: 16),
         onTap: () {
-          // Buka halaman fitur yang dipilih
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => page),

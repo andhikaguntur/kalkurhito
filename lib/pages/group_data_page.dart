@@ -15,17 +15,15 @@ class GroupDataPage extends StatelessWidget {
 
   // Data anggota kelompok (bisa disesuaikan dengan data kelompok kalian)
   final List<Member> members = const [
-    Member(nama: 'Nama Anggota 1', nim: '00000001'),
-    Member(nama: 'Nama Anggota 2', nim: '00000002'),
-    Member(nama: 'Nama Anggota 3', nim: '00000003'),
+    Member(nama: 'Zaky Surya Fadilah', nim: '124240071'),
+    Member(nama: 'Andhika Guntur Ramadan', nim: '124240077'),
+    Member(nama: 'Dimas Rhito Aryomukti', nim: '124240136'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Data Kelompok'),
-      ),
+      appBar: AppBar(title: const Text('Data Kelompok')),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: members.length,
@@ -34,9 +32,7 @@ class GroupDataPage extends StatelessWidget {
           return Card(
             margin: const EdgeInsets.only(bottom: 12),
             child: ListTile(
-              leading: CircleAvatar(
-                child: Text('${index + 1}'),
-              ),
+              leading: CircleAvatar(child: Text('${index + 1}')),
               title: Text(
                 member.nama,
                 style: const TextStyle(fontWeight: FontWeight.bold),

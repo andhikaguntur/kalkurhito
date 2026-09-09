@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../utils/number_validator.dart';
 
 /// Halaman Cek Ganjil / Genap
-/// Memeriksa apakah sebuah bilangan bulat bernilai ganjil atau genap.
+/// Memeriksa apakah bilangan yang diinputkan bernilai ganjil atau genap.
 class OddEvenPage extends StatefulWidget {
   const OddEvenPage({super.key});
 
@@ -16,17 +16,25 @@ class _OddEvenPageState extends State<OddEvenPage> {
   String _result = '';
   bool _isEven = false;
 
-  /// Fungsi untuk memeriksa apakah bilangan ganjil atau genap
+  /// Fungsi untuk mengecek bilangan ganjil atau genap
   void _cek() {
     if (_formKey.currentState!.validate()) {
       final double n = NumberValidator.parse(_numController.text);
-      final int intVal = n.toInt();
 
-      final bool isGenap = (intVal % 2 == 0);
+      // Cek apakah ada angka di belakang koma (desimal)
+      if (n % 1 != 0) {
+        setState(() {
+          _result = 'Masukkan bilangan bulat untuk cek ganjil/genap';
+        });
+        return;
+      }
+
+      // Logika ganjil/genap: jika sisa bagi (% 2) sama dengan 0 maka genap
+      final bool isGenap = (n.toInt() % 2 == 0);
 
       setState(() {
         _isEven = isGenap;
-        _result = '$intVal adalah bilangan ${isGenap ? 'GENAP' : 'GANJIL'}';
+        _result = '${n.toInt()} adalah bilangan ${isGenap ? 'GENAP' : 'GANJIL'}';
       });
     } else {
       setState(() => _result = '');
@@ -51,20 +59,19 @@ class _OddEvenPageState extends State<OddEvenPage> {
           key: _formKey,
           child: Column(
             children: [
-              // Input Bilangan Bulat
+              // Input Angka
               TextFormField(
                 controller: _numController,
                 keyboardType: const TextInputType.numberWithOptions(
-                  decimal: false,
+                  decimal: true,
                   signed: true,
                 ),
                 decoration: const InputDecoration(
-                  labelText: 'Masukkan Bilangan Bulat',
-                  hintText: 'Contoh: 7 atau 14',
+                  labelText: 'Masukkan Bilangan',
+                  hintText: 'Contoh: 8 atau 15',
                   border: OutlineInputBorder(),
                 ),
-                // Ganjil / Genap hanya berlaku untuk bilangan bulat (allowDecimal: false)
-                validator: (v) => NumberValidator.validate(v, allowDecimal: false),
+                validator: (v) => NumberValidator.validate(v),
               ),
               const SizedBox(height: 20),
 
@@ -79,7 +86,7 @@ class _OddEvenPageState extends State<OddEvenPage> {
               ),
               const SizedBox(height: 24),
 
-              // Hasil Pemeriksaan
+              // Tampilan Hasil
               if (_result.isNotEmpty)
                 Container(
                   width: double.infinity,

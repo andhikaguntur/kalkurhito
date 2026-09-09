@@ -1,44 +1,69 @@
 import 'package:flutter/material.dart';
 import '../utils/number_validator.dart';
 
-/// Halaman Perkalian & Pembagian
-/// Melakukan operasi perkalian (×) dan pembagian (÷) antara dua angka.
-class MulDivPage extends StatefulWidget {
-  const MulDivPage({super.key});
+/// Halaman Operasi Matematika / Kalkulator
+/// Menggabungkan operasi Penjumlahan (+), Pengurangan (-), Perkalian (*), dan Pembagian (/)
+/// Menggunakan tipe data `double` untuk mendukung bilangan bulat maupun pecahan.
+class CalculatorPage extends StatefulWidget {
+  const CalculatorPage({super.key});
 
   @override
-  State<MulDivPage> createState() => _MulDivPageState();
+  State<CalculatorPage> createState() => _CalculatorPageState();
 }
 
-class _MulDivPageState extends State<MulDivPage> {
+class _CalculatorPageState extends State<CalculatorPage> {
+  // Key untuk validasi form input
   final _formKey = GlobalKey<FormState>();
+
+  // Controller untuk membaca nilai input angka
   final _num1Controller = TextEditingController();
   final _num2Controller = TextEditingController();
+
+  // Variabel untuk menyimpan hasil perhitungan
   String _result = '';
   bool _isError = false;
 
-  /// Fungsi untuk menghitung operasi perkalian atau pembagian
-  void _hitung(String operasi) {
+  /// Fungsi untuk melakukan perhitungan matematika berdasarkan operator (+, -, *, /)
+  void _hitung(String operator) {
+    // 1. Cek apakah kedua input sudah valid
     if (_formKey.currentState!.validate()) {
+      // 2. Ambil nilai input dan ubah menjadi tipe double
       final double a = NumberValidator.parse(_num1Controller.text);
       final double b = NumberValidator.parse(_num2Controller.text);
 
-      // Cek pembagian dengan 0
-      if (operasi == '/' && b == 0) {
+      // 3. Cek kondisi khusus: pembagian dengan angka 0
+      if (operator == '/' && b == 0) {
         setState(() {
           _isError = true;
-          _result = 'Error: Tidak dapat membagi dengan angka 0';
+          _result = 'Error: Tidak bisa membagi dengan angka 0';
         });
         return;
       }
 
-      final double hasil = (operasi == '*') ? (a * b) : (a / b);
+      // 4. Hitung hasil sesuai operator yang dipilih
+      double hasil = 0.0;
+      switch (operator) {
+        case '+':
+          hasil = a + b;
+          break;
+        case '-':
+          hasil = a - b;
+          break;
+        case '*':
+          hasil = a * b;
+          break;
+        case '/':
+          hasil = a / b;
+          break;
+      }
 
+      // 5. Update tampilan dengan hasil perhitungan
       setState(() {
         _isError = false;
-        _result = 'Hasil: ${_formatResult(hasil)}';
+        _result = 'Hasil: $hasil';
       });
     } else {
+      // Jika form tidak valid, kosongkan hasil
       setState(() {
         _result = '';
         _isError = false;
@@ -46,16 +71,9 @@ class _MulDivPageState extends State<MulDivPage> {
     }
   }
 
-  /// Format angka agar rapi
-  String _formatResult(double val) {
-    if (val % 1 == 0) {
-      return val.toInt().toString();
-    }
-    return val.toStringAsFixed(2);
-  }
-
   @override
   void dispose() {
+    // Selalu dispose controller saat halaman ditutup
     _num1Controller.dispose();
     _num2Controller.dispose();
     super.dispose();
@@ -65,9 +83,9 @@ class _MulDivPageState extends State<MulDivPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Perkalian & Pembagian'),
+        title: const Text('Operasi Matematika (+, -, *, /)'),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
@@ -82,7 +100,7 @@ class _MulDivPageState extends State<MulDivPage> {
                 ),
                 decoration: const InputDecoration(
                   labelText: 'Angka Pertama',
-                  hintText: 'Contoh: 10 atau 4.5',
+                  hintText: 'Masukkan angka pertama',
                   border: OutlineInputBorder(),
                 ),
                 validator: (v) => NumberValidator.validate(v),
@@ -98,14 +116,36 @@ class _MulDivPageState extends State<MulDivPage> {
                 ),
                 decoration: const InputDecoration(
                   labelText: 'Angka Kedua',
-                  hintText: 'Contoh: 2 atau 0.5',
+                  hintText: 'Masukkan angka kedua',
                   border: OutlineInputBorder(),
                 ),
                 validator: (v) => NumberValidator.validate(v),
               ),
               const SizedBox(height: 20),
 
-              // Tombol Kali dan Bagi
+              // Baris 1: Tombol Tambah (+) & Kurang (-)
+              Row(
+                children: [
+                  Expanded(
+                    child: FilledButton.icon(
+                      onPressed: () => _hitung('+'),
+                      icon: const Icon(Icons.add),
+                      label: const Text('Tambah (+)'),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: FilledButton.icon(
+                      onPressed: () => _hitung('-'),
+                      icon: const Icon(Icons.remove),
+                      label: const Text('Kurang (-)'),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+
+              // Baris 2: Tombol Kali (*) & Bagi (/)
               Row(
                 children: [
                   Expanded(
@@ -127,7 +167,7 @@ class _MulDivPageState extends State<MulDivPage> {
               ),
               const SizedBox(height: 24),
 
-              // Hasil Perhitungan
+              // Tampilan Hasil Perhitungan
               if (_result.isNotEmpty)
                 Container(
                   width: double.infinity,
@@ -139,7 +179,7 @@ class _MulDivPageState extends State<MulDivPage> {
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: _isError
-                          ? Colors.red.shade300
+                          ? Colors.red.shade200
                           : Colors.deepPurple.shade200,
                     ),
                   ),

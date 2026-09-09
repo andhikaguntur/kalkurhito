@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../utils/number_validator.dart';
 
 /// Halaman Cek Ganjil / Genap
-/// Memeriksa apakah bilangan yang diinputkan bernilai ganjil atau genap.
 class OddEvenPage extends StatefulWidget {
   const OddEvenPage({super.key});
 

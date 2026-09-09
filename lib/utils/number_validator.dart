@@ -14,7 +14,7 @@ class NumberValidator {
       return 'Masukkan angka yang valid';
     }
 
-    return null; // Valid (tidak ada error)
+    return null;
   }
 
   /// Mengubah teks input menjadi tipe double

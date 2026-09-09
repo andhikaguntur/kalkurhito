@@ -22,8 +22,8 @@ class _LoginPageState extends State<LoginPage> {
   bool _obscurePassword = true;
 
   // Kredensial default untuk login
-  final String _validUsername = 'admin';
-  final String _validPassword = '12345';
+  final String _validUsername = 'atmin';
+  final String _validPassword = 'freewifi';
 
   /// Fungsi untuk memproses login
   void _login() {
@@ -154,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 // Petunjuk akun login
                 const Text(
-                  'Hint: username = admin, password = 12345',
+                  'Hint: username = atmin, password = freewifi',
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ],

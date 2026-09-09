@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../utils/number_validator.dart';
 
 /// Halaman Operasi Matematika / Kalkulator
-/// Menggabungkan operasi Penjumlahan (+), Pengurangan (-), Perkalian (*), dan Pembagian (/)
-/// Menggunakan tipe data `double` untuk mendukung bilangan bulat maupun pecahan.
 class CalculatorPage extends StatefulWidget {
   const CalculatorPage({super.key});
 

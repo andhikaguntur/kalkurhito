@@ -51,7 +51,7 @@ class MenuPage extends StatelessWidget {
           _buildMenuCard(
             context,
             icon: Icons.calculate,
-            title: '2. Operasi Matematika (+, -, ×, ÷)',
+            title: '2. Kalkulator',
             subtitle: 'Penjumlahan, pengurangan, perkalian, dan pembagian',
             page: const CalculatorPage(),
           ),
@@ -65,7 +65,7 @@ class MenuPage extends StatelessWidget {
             page: const OddEvenPage(),
           ),
 
-          // Menu 4: Hitung Banyak Angka (COUNT)
+          // Menu 4: Hitung Banyak Angka
           _buildMenuCard(
             context,
             icon: Icons.format_list_numbered,

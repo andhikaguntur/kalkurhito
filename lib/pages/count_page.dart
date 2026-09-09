@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Halaman Hitung Banyak Angka (COUNT)
-/// Menghitung berapa banyak angka/bilangan yang diinputkan (konsep COUNT, bukan penjumlahan/SUM).
+/// Halaman Hitung Banyak Angka
 class CountPage extends StatefulWidget {
   const CountPage({super.key});
 
@@ -17,7 +16,7 @@ class _CountPageState extends State<CountPage> {
   int _countDigit = 0;
   bool _hasCalculated = false;
 
-  /// Fungsi untuk menghitung banyaknya angka yang dimasukkan (COUNT)
+  /// Fungsi untuk menghitung banyaknya angka yang dimasukkan
   void _hitungBanyak() {
     final text = _controller.text.trim();
 
@@ -71,7 +70,7 @@ class _CountPageState extends State<CountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hitung Banyak Angka (COUNT)'),
+        title: const Text('Hitung Banyak Angka'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -102,18 +101,18 @@ class _CountPageState extends State<CountPage> {
             ),
             const SizedBox(height: 16),
 
-            // Tombol Hitung COUNT
+            // Tombol Hitung
             SizedBox(
               width: double.infinity,
               child: FilledButton.icon(
                 onPressed: _hitungBanyak,
                 icon: const Icon(Icons.format_list_numbered),
-                label: const Text('Hitung Banyaknya (COUNT)'),
+                label: const Text('Hitung Banyaknya'),
               ),
             ),
             const SizedBox(height: 24),
 
-            // Hasil COUNT
+            // Hasil
             if (_hasCalculated)
               Container(
                 width: double.infinity,

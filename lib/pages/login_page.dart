@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 // Judul Aplikasi
                 const Text(
-                  'Login Aplikasi Kalkulator',
+                  'Login Aplikasi Kalkurhito',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,

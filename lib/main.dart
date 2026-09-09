@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Aplikasi Kalkulator',
+      title: 'Kalkurhito',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // Menggunakan tema warna Material 3 berbasis Deep Purple

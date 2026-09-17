@@ -22,7 +22,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   bool _isError = false;
   String _activeOperator = '';
 
-  /// Fungsi untuk melakukan perhitungan matematika berdasarkan operator (+, -, *, /)
+  /// Fungsi untuk melakukan perhitungan matematika berdasarkan operator
   void _hitung(String operator) {
     setState(() {
       _activeOperator = operator;
@@ -317,7 +317,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
     );
   }
 
-  /// Helper untuk membangun tombol operasi modern
+  /// Tombol operasi
   Widget _buildOperationButton({
     required String label,
     required String symbol,

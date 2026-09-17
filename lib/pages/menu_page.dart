@@ -7,11 +7,6 @@ import 'odd_even_page.dart';
 import 'count_page.dart';
 
 /// Halaman Menu Utama
-/// Berisi 4 menu navigasi utama aplikasi:
-/// 1. Data Kelompok
-/// 2. Operasi Matematika (+, -, *, /)
-/// 3. Cek Ganjil / Genap
-/// 4. Hitung Banyak Angka (COUNT)
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
 
@@ -136,7 +131,7 @@ class MenuPage extends StatelessWidget {
                   accentColor: const Color(0xFF673AB7),
                 ),
 
-                // Menu 2: Operasi Matematika (+, -, *, /)
+                // Menu 2: Operasi Matematika
                 _buildMenuCard(
                   context,
                   icon: Icons.calculate_rounded,
@@ -173,7 +168,7 @@ class MenuPage extends StatelessWidget {
     );
   }
 
-  /// Helper widget kartu menu modern
+  /// Widget
   Widget _buildMenuCard(
     BuildContext context, {
     required IconData icon,

@@ -18,7 +18,6 @@ class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  // Status apakah password disembunyikan (titik-titik) atau ditampilkan
   bool _obscurePassword = true;
 
   // Kredensial default untuk login
@@ -27,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
 
   /// Fungsi untuk memproses login
   void _login() {
-    // 1. Validasi form terlebih dahulu
+    // 1. Validasi form 
     if (_formKey.currentState!.validate()) {
       final username = _usernameController.text.trim();
       final password = _passwordController.text;
@@ -40,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
           MaterialPageRoute(builder: (context) => const MenuPage()),
         );
       } else {
-        // Tampilkan pesan error jika login gagal
+        // Tampilan pesan error jika login gagal
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Row(
@@ -78,8 +77,8 @@ class _LoginPageState extends State<LoginPage> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFFEDE7F6), // Lavender sangat lembut di bagian atas
-              Color(0xFFF8F7FC), // Berangsur ke warna putih gading
+              Color(0xFFEDE7F6), 
+              Color(0xFFF8F7FC), 
               Colors.white,
             ],
           ),
@@ -93,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Icon Header dengan Container bergaya modern
+                    // Icon Header
                     Container(
                       padding: const EdgeInsets.all(22),
                       decoration: BoxDecoration(
@@ -222,7 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             const SizedBox(height: 24),
 
-                            // Tombol Login dengan Efek Gradient & Shadow
+                            // Tombol Login 
                             Container(
                               width: double.infinity,
                               height: 52,
